@@ -54,7 +54,114 @@ void init (void)
 	glPointSize(9.0);
 	glLineWidth(1.0f);
 }
-
+void layoutkursi()
+{
+	/*Begin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-50-5, -0.133, -75-5);
+    glVertex3f(50+5, -0.133, -75-5);
+    glVertex3f(50+5, -0.133, 0.0+5);
+    glVertex3f(-50-5, -0.133, 0.0+5); kurangi 2.5
+    glEnd();*/
+    
+    //kiri
+    
+    glBegin(GL_QUADS);
+	glColor3f(0.0, 0.0, 1.0);
+    glVertex3f(50+2.5+20, 15 , -75-5);
+    glVertex3f(50+2.5+20,15 ,0.0+5);
+    glVertex3f(50+2.5, -0.133 , 0.0+5);
+    glVertex3f(50+2.5, -0.133, -75-5); 
+    glEnd();
+    
+    //kanan
+    glBegin(GL_QUADS);
+	glColor3f(0.0, 0.0, 1.0);
+    glVertex3f(-50-2.5-20, 15 , -75-5);
+    glVertex3f(-50-2.5-20,15 ,0.0+5);
+    glVertex3f(-50-2.5, -0.133 , 0.0+5);
+    glVertex3f(-50-2.5, -0.133, -75-5); 
+    glEnd();
+    //depan
+    glBegin(GL_QUADS);
+	glColor3f(0.0, 0.0, 1.0);
+    glVertex3f(-50-2.5, 15 , 0.0+2.5+20);
+    glVertex3f(50+2.5,15 ,0.0+2.5+20);
+    glVertex3f(50+2.5, -0.133 , 0.0+2.5);
+    glVertex3f(-50-2.5, -0.133, 0.0+2.5); 
+    glEnd();
+    //belakang
+    glBegin(GL_QUADS);
+	glColor3f(0.0, 0.0, 1.0);
+    glVertex3f(-50-2.5, 15 , -75-2.5-20);
+    glVertex3f(50+2.5,15 ,-75-2.5-20);
+    glVertex3f(50+2.5, -0.133 , -75-2.5);
+    glVertex3f(-50-2.5, -0.133,-75-2.5); 
+    glEnd();
+}
+void pinggirlapangan()
+{
+	glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-50-5, -0.133, -75-5);
+    glVertex3f(50+5, -0.133, -75-5);
+    glVertex3f(50+5, -0.133, 0.0+5);
+    glVertex3f(-50-5, -0.133, 0.0+5);
+    glEnd();
+    
+    glBegin(GL_QUADS);
+	glColor3f(0.5, 0.5, 0.5);
+    glVertex3f(50+2.5, -0.133+2, -75-5+1);
+    glVertex3f(50+2.5, -0.133, -75-5+1);
+    glVertex3f(50+2.5, -0.133, 0.0+5-1);
+    glVertex3f(50+2.5, -0.133+2, 0.0+5-1);
+    
+    glColor3f(0.5, 0.5, 0.5);
+    glVertex3f(50+2.7, -0.133+2, -75-5+1);
+    glVertex3f(50+2.7, -0.133, -75-5+1);
+    glVertex3f(50+2.7, -0.133, 0.0+5-1);
+    glVertex3f(50+2.7, -0.133+2, 0.0+5-1);
+    
+    glColor3f(0.5, 0.5, 0.5);
+    glVertex3f(50+2.5, -0.133+2, -75-5+1);
+    glVertex3f(50+2.7, -0.133+2, -75-5+1);
+    glVertex3f(50+2.7, -0.133+2, 0.0+5-1);
+    glVertex3f(50+2.5, -0.133+2, 0.0+5-1);
+    
+    glColor3f(0.5, 0.5, 0.5);
+    glVertex3f(50+2.7, -0.133+2, 0.0+5-1);
+    glVertex3f(50+2.7, -0.133, 0.0+5-1);
+    glVertex3f(50+2.5, -0.133, 0.0+5-1);
+    glVertex3f(50+2.5, -0.133+2, 0.0+5-1);
+    
+    glColor3f(0.5, 0.5, 0.5);
+    glVertex3f(50+2.7, -0.133+2, -75-5+1);
+    glVertex3f(50+2.7, -0.133, -75-5+1);
+    glVertex3f(50+2.5, -0.133, -75-5+1);
+    glVertex3f(50+2.5, -0.133+2, -75-5+1);
+    
+    // pinggir lapangan kedua kanan
+    
+    glBegin(GL_QUADS);
+	glColor3f(0.5, 0.5, 0.5);
+    glVertex3f(-50-2.5, -0.133+2, -75-5+1);
+    glVertex3f(-50-2.5, -0.133, -75-5+1);
+    glVertex3f(-50-2.5, -0.133, 0.0+5-1);
+    glVertex3f(-50-2.5, -0.133+2, 0.0+5-1);
+    
+    glEnd();
+    
+    //pinggir lapangan kedua belakang
+    
+    glBegin(GL_QUADS);
+	glColor3f(0.5, 0.5, 0.5);
+    glVertex3f(-50-2.5, -0.133+2, -75-2.5);
+    glVertex3f(50+2.5, -0.133+2, -75-2.5);
+    glVertex3f(50+2.5, -0.133, -75-2.5);
+    glVertex3f(-50-2.5, -0.133, -75-2.5);
+    glEnd();
+    
+}
 void lapangan()
 {	
 int n;
@@ -480,6 +587,9 @@ void tampil(void)
 	glTranslatef(X,Y,Z);
 	glPushMatrix();
 	lapangan();
+	gawang();
+	pinggirlapangan();
+	layoutkursi();
 	glPopMatrix();
 	
 
