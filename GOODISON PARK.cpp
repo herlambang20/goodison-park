@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <glut.h>
+#include <math.h>
 
 void init(void);
 void tampil(void);
@@ -17,6 +18,7 @@ int is_depth;
 int X = 0;
 int Y = 0;
 int Z = 0;
+
 
  
 
@@ -55,6 +57,52 @@ void init (void)
 	glPointSize(9.0);
 	glLineWidth(1.0f);
 }
+
+int kubus (float n) {
+	glBegin(GL_QUADS);
+    glVertex3f(-n/2, n/2, n/2);
+    glVertex3f(n/2, n/2, n/2);
+    glVertex3f(n/2, -n/2, n/2);
+    glVertex3f(-n/2, -n/2, n/2);
+    glEnd();
+    
+    glBegin(GL_QUADS);
+    glVertex3f(-n/2, n/2, -n/2);
+    glVertex3f(n/2, n/2, -n/2);
+    glVertex3f(n/2, -n/2, -n/2);
+    glVertex3f(-n/2, -n/2, -n/2);
+    glEnd();
+    
+    glBegin(GL_QUADS);
+    glVertex3f(-n/2, n/2, -n/2);
+    glVertex3f(-n/2, n/2, n/2);
+    glVertex3f(-n/2, -n/2, n/2);
+    glVertex3f(-n/2, -n/2, -n/2);
+    glEnd();
+ 
+    glBegin(GL_QUADS);
+    glVertex3f(n/2, n/2, -n/2);
+    glVertex3f(n/2, n/2, n/2);
+    glVertex3f(n/2, -n/2, n/2);
+    glVertex3f(n/2, -n/2, -n/2);
+    glEnd();
+    
+    glBegin(GL_QUADS);
+    glVertex3f(-n/2, n/2, n/2);
+    glVertex3f(n/2, n/2, n/2);
+    glVertex3f(n/2, n/2, -n/2);
+    glVertex3f(-n/2, n/2, -n/2);
+    glEnd();
+    
+    glBegin(GL_QUADS);
+    glVertex3f(-n/2, -n/2, n/2);
+    glVertex3f(n/2, -n/2, n/2);
+    glVertex3f(n/2, -n/2, -n/2);
+    glVertex3f(-n/2, -n/2, -n/2);
+    glEnd();
+	
+}
+
 void layoutkursi()
 {
     
@@ -114,7 +162,7 @@ glPushMatrix();
 glColor3f(0.5, 0.5, 0.5);
 glTranslatef(0,n,k);
 glScalef(30,1.0,1.0);
-glutSolidCube(4);
+kubus(4);
 glPopMatrix();
 n+=2;
 k-=3.7;
@@ -128,7 +176,7 @@ glPushMatrix();
 glColor3f(0.5, 0.5, 0.5);
 glTranslatef(0,j,l);
 glScalef(30.0,1.0,1.0);
-glutSolidCube(4);
+kubus(4);
 glPopMatrix();
 j+=2;
 l+=3.7;
@@ -141,7 +189,7 @@ glPushMatrix();
 glColor3f(0.5, 0.5, 0.5);
 glTranslatef(a,b,-37);
 glScalef(1.0,1.0,25);
-glutSolidCube(4);
+kubus(4);
 glPopMatrix();
 b+=2;
 a+=3.7;
@@ -154,7 +202,7 @@ glPushMatrix();
 glColor3f(0.5, 0.5, 0.5);
 glTranslatef(d,c,-37);
 glScalef(1.0,1.0,25);
-glutSolidCube(4);
+kubus(4);
 glPopMatrix();
 c+=2;
 d-=3.7;
@@ -164,6 +212,8 @@ d-=3.7;
 
 void kursi()
 {
+
+
 int i;
 int j;
 float n = 5;
@@ -179,20 +229,26 @@ float y = 5;
 int z=11;
 //belakang
 for(j=1; j<=40; j++){	
+
+if(j%5==0){
+p-=3;	
+}
+else{
+
 	for (i=1; i<=9; i++){
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(p,n,k);
 	glScalef(2,3,0.5);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(p,n-1,k+1);
 	glScalef(2,0.5,1.5);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 	n+=2;
 	k-=3.7;
@@ -203,24 +259,28 @@ for(j=1; j<=40; j++){
 					}
 p-=3;
 }
-
+}
 
 //depan
 for(j=1; j<=40; j++){
+	if(j%5==0){
+a-=3;	
+}
+else{
 	for (i=1; i<=9; i++){
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(a,c,b);
 	glScalef(2,3,0.5);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(a,c-1,b-1);
 	glScalef(2,0.5,1.5);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 	c+=2;
 	b+=3.7;
@@ -230,25 +290,30 @@ for(j=1; j<=40; j++){
 				}
 					}
 a-=3;
-}	
+}
+}
 
 
 //kiri
 for(j=1; j<=33; j++){
+if(j%5==0){
+z-=3;	
+}
+else{	
 	for (i=1; i<=9; i++){
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(x,y,z);
 	glScalef(0.5,3,2);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(x-1,y-1,z);
 	glScalef(1.5,0.5,2);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 	y+=2;
 	x+=3.7;
@@ -259,26 +324,31 @@ for(j=1; j<=33; j++){
 					}
 z-=3;
 }
+}
 
 //kanan
 float q = -68;
 float w = 5;
 int e=11;	
 for(j=1; j<=33; j++){
+if(j%5==0){
+e-=3;	
+}
+else{	
 	for (i=1; i<=9; i++){
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(q,w,e);
 	glScalef(0.5,3,2);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(q+1,w-1,e);
 	glScalef(1.5,0.5,2);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 	w+=2;
 	q-=3.7;
@@ -290,6 +360,9 @@ for(j=1; j<=33; j++){
 e-=3;
 }
 }
+}
+
+
 
 void tingkatbelakang(){
 float a = 26;
@@ -347,7 +420,7 @@ glPushMatrix();
 glColor3f(0.5, 0.5, 0.5);
 glTranslatef(0,a,b);
 glScalef(30,1.0,1.0);
-glutSolidCube(4);
+kubus(4);
 glPopMatrix();
 a+=2;
 b-=3.7;
@@ -355,20 +428,24 @@ b-=3.7;
 //kursi
 
 for(j=1; j<=40; j++){
+if(j%5==0){
+p-=3;	
+}
+else{	
 	for (i=1; i<=7; i++){
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(p,n,k);
 	glScalef(2,3,0.5);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(p,n-1,k+1);
 	glScalef(2,0.5,1.5);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 	n+=2;
 	k-=3.7;
@@ -379,14 +456,15 @@ for(j=1; j<=40; j++){
 					}
 p-=3;
 }	
-
 }
+}
+
 
 void tingkatdepan(){
 int i;	
+int k;
 float j=25;
 float l=25.75;	
-
 float c = 28.5;
 float b = 25.5;
 int a=58;
@@ -413,28 +491,32 @@ glPushMatrix();
 glColor3f(0.5, 0.5, 0.5);
 glTranslatef(0,j,l);
 glScalef(30.0,1.0,1.0);
-glutSolidCube(4);
+kubus(4);
 glPopMatrix();
 j+=2;
 l+=3.7;
 }    
 
 //depan
-for(j=1; j<=40; j++){
+for(k=1; k<=40; k++){
+if(k%5==0){
+a-=3;	
+}
+else{
 	for (i=1; i<=7; i++){
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(a,c,b);
 	glScalef(2,3,0.5);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(a,c-1,b-1);
 	glScalef(2,0.5,1.5);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 	c+=2;
 	b+=3.7;
@@ -445,6 +527,7 @@ for(j=1; j<=40; j++){
 					}
 a-=3;
 }	
+}
 }
 
 void tingkatkiri(){
@@ -466,7 +549,7 @@ glPushMatrix();
 glColor3f(0.5, 0.5, 0.5);
 glTranslatef(d,c,-37);
 glScalef(1.0,1.0,25);
-glutSolidCube(4);
+kubus(4);
 glPopMatrix();
 c+=2;
 d-=3.7;
@@ -478,20 +561,24 @@ float q = -76;
 float w = 29;
 int e=11;	
 for(j=1; j<=33; j++){
+	if(j%5==0){
+e-=3;	
+}
+else{
 	for (i=1; i<=7; i++){
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(q,w,e);
 	glScalef(0.5,3,2);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 
 	glPushMatrix();
 	glColor3f(0.0, 0.0, 0.7);
 	glTranslatef(q+1,w-1,e);
 	glScalef(1.5,0.5,2);
-	glutSolidCube(1);
+	kubus(1);
 	glPopMatrix();
 	w+=2;
 	q-=3.7;
@@ -506,7 +593,7 @@ e-=3;
 
 }
 }
-
+}
 
 void pinggirlapangan()
 {
@@ -771,21 +858,21 @@ glPushMatrix();
 glColor3f(1.0, 1.0, 1.0);
 glTranslatef(-39.5,6,-22);
 glScalef(1.0,12.0,1.0);
-glutSolidCube(1);
+kubus(1);
 glPopMatrix();
 
 glPushMatrix();
 glColor3f(1.0, 1.0, 1.0);
 glTranslatef(-39.5,6,-52);
 glScalef(1.0,12.0,1.0);
-glutSolidCube(1);
+kubus(1);
 glPopMatrix();
 
 glPushMatrix();
 glColor3f(1.0, 1.0, 1.0);
 glTranslatef(-39.5,11.5,-37);
 glScalef(1.0,1.0,30.0);
-glutSolidCube(1);
+kubus(1);
 glPopMatrix();
 
 //knan
@@ -793,21 +880,21 @@ glPushMatrix();
 glColor3f(1.0, 1.0, 1.0);
 glTranslatef(39.5,6,-22);
 glScalef(1.0,12.0,1.0);
-glutSolidCube(1);
+kubus(1);
 glPopMatrix();
 
 glPushMatrix();
 glColor3f(1.0, 1.0, 1.0);
 glTranslatef(39.5,6,-52);
 glScalef(1.0,12.0,1.0);
-glutSolidCube(1);
+kubus(1);
 glPopMatrix();
 
 glPushMatrix();
 glColor3f(1.0, 1.0, 1.0);
 glTranslatef(39.5,11.5,-37);
 glScalef(1.0,1.0,30.0);
-glutSolidCube(1);
+kubus(1);
 glPopMatrix();
 
 
@@ -1114,3 +1201,4 @@ void ukuran (int lebar , int tinggi)
 	glTranslatef(0.0 , -5.0 , -150.0);
 	glMatrixMode(GL_MODELVIEW);
 }
+
