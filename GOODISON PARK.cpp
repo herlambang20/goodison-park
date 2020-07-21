@@ -56,9 +56,9 @@ void DrawCircle(float cx, float cz, float cy ,  float r, int num_segments)
 	glEnd(); 
 }
 
-void seperempatCircle(float cx, float cz, float cy ,  float r, int num_segments) 
+void SetengahCircle(float cx, float cz, float cy ,  float r, int num_segments) 
 { 
-	float theta = 2 * 3.1415926 / float(num_segments); 
+	float theta = 1 * 3.1415926 / float(num_segments); 
 	float tangetial_factor = tanf(theta);//calculate the tangential factor 
 
 	float radial_factor = cosf(theta);//calculate the radial factor 
@@ -67,8 +67,79 @@ void seperempatCircle(float cx, float cz, float cy ,  float r, int num_segments)
 
 	float y = 0; 
     
-	glBegin(GL_LINE_LOOP); 
-	for(int ii = 0; ii < num_segments; ii++) 
+	glBegin(GL_LINE_STRIP); 
+	for(int ii = 0; ii <  num_segments; ii++) 
+	{  
+		glVertex3f(y + cx, cz ,x + cy);//output vertex 
+        
+		//calculate the tangential vector 
+		//remember, the radial vector is (x, y) 
+		//to get the tangential vector we flip those coordinates and negate one of them 
+
+		float tx = y; 
+		float ty = -x; 
+        
+		//add the tangential vector 
+
+		x += tx * tangetial_factor; 
+		y += ty * tangetial_factor; 
+        
+		//correct using the radial factor 
+
+		x *= radial_factor; 
+		y *= radial_factor; 
+	} 
+	glEnd(); 
+}
+void SetengahCircleNormal(float cx, float cz, float cy ,  float r, int num_segments) 
+{ 
+	float theta = -1 * 3.1415926 / float(num_segments); 
+	float tangetial_factor = tanf(theta);//calculate the tangential factor 
+
+	float radial_factor = cosf(theta);//calculate the radial factor 
+	
+	float x = r;//we start at angle = 0 
+
+	float y = 0; 
+    
+	glBegin(GL_LINE_STRIP); 
+	for(int ii = 0; ii <  num_segments; ii++) 
+	{  
+		glVertex3f(y + cx, cz ,x + cy);//output vertex 
+        
+		//calculate the tangential vector 
+		//remember, the radial vector is (x, y) 
+		//to get the tangential vector we flip those coordinates and negate one of them 
+
+		float tx = y; 
+		float ty = -x; 
+        
+		//add the tangential vector 
+
+		x += tx * tangetial_factor; 
+		y += ty * tangetial_factor; 
+        
+		//correct using the radial factor 
+
+		x *= radial_factor; 
+		y *= radial_factor; 
+	} 
+	glEnd(); 
+}
+
+void seperempatCircle(float cx, float cz, float cy ,  float r, int num_segments) 
+{ 
+	float theta = -1 * 3.1415926 / float(num_segments); 
+	float tangetial_factor = tanf(theta);//calculate the tangential factor 
+
+	float radial_factor = cosf(theta);//calculate the radial factor 
+	
+	float x = r;//we start at angle = 0 
+
+	float y = 0; 
+    
+	glBegin(GL_LINE_STRIP); 
+	for(int ii = 0; ii < 0.5 * num_segments; ii++) 
 	{ 
 		glVertex3f(x + cx, cz ,y + cy);//output vertex 
         
@@ -81,8 +152,42 @@ void seperempatCircle(float cx, float cz, float cy ,  float r, int num_segments)
         
 		//add the tangential vector 
 
-		x += tx * -0.5*tangetial_factor; 
-		y += ty * -0.5*tangetial_factor; 
+		x += tx * tangetial_factor; 
+		y += ty * tangetial_factor; 
+        
+		//correct using the radial factor 
+
+		x *= radial_factor; 
+		y *= radial_factor; 
+	} 
+	glEnd(); 
+}void seperempatCircleNormal(float cx, float cz, float cy ,  float r, int num_segments) 
+{ 
+	float theta = 1 * 3.1415926 / float(num_segments); 
+	float tangetial_factor = tanf(theta);//calculate the tangential factor 
+
+	float radial_factor = cosf(theta);//calculate the radial factor 
+	
+	float x = r;//we start at angle = 0 
+
+	float y = 0; 
+    
+	glBegin(GL_LINE_STRIP); 
+	for(int ii = 0; ii < 0.5 * num_segments; ii++) 
+	{ 
+		glVertex3f(x + cx, cz ,y + cy);//output vertex 
+        
+		//calculate the tangential vector 
+		//remember, the radial vector is (x, y) 
+		//to get the tangential vector we flip those coordinates and negate one of them 
+
+		float tx = -y; 
+		float ty = x; 
+        
+		//add the tangential vector 
+
+		x += tx * tangetial_factor; 
+		y += ty * tangetial_factor; 
         
 		//correct using the radial factor 
 
@@ -99,6 +204,12 @@ void lingkaran()
     DrawCircle(-0.5, 0.13, -37.5 , 10, 360);
     
     seperempatCircle(-40, 0.13, -2.5 , 5, 50);
+    seperempatCircleNormal(-40, 0.13, -72.5 , 5, 50);
+    seperempatCircleNormal(40, 0.13, -2.5 , -5, 50);
+    seperempatCircle(40, 0.13, -72.5 , -5, 50);
+    SetengahCircle(24,0.13,-37,2,100);
+    SetengahCircleNormal(-24,0.13,-37,2,100);
+    glLineWidth(1.0);
     //corner
 }
 
@@ -127,16 +238,61 @@ int main (int argc , char **argv)
 void init (void)
 {
 	
-	glClearColor (1.0 , 1.0 , 1.0 ,1.0);
+	glClearColor (0.0 , 0.0 , 0.0 ,1.0);
 	glMatrixMode(GL_PROJECTION);
-	glEnable(GL_LIGHTING);
+//	glEnable(GL_LIGHTING);
 	glEnable(GL_COLOR_MATERIAL);
-	glEnable(GL_LIGHT0);
+//	glEnable(GL_LIGHT0);
 	glEnable(GL_DEPTH_TEST);
 	is_depth = 1;
 	glMatrixMode(GL_MODELVIEW);
 	glPointSize(9.0);
 
+}
+
+int balok (float n) {
+	glBegin(GL_QUADS);
+    glVertex3f(-n, n/2, n/2);
+    glVertex3f(n, n/2, n/2);
+    glVertex3f(n, -n/2, n/2);
+    glVertex3f(-n, -n/2, n/2);
+    glEnd();
+    
+    glBegin(GL_QUADS);
+    glVertex3f(-n, n/2, -n/2);
+    glVertex3f(n, n/2, -n/2);
+    glVertex3f(n, -n/2, -n/2);
+    glVertex3f(-n, -n/2, -n/2);
+    glEnd();
+    
+    glBegin(GL_QUADS);
+    glVertex3f(-n, n/2, -n/2);
+    glVertex3f(-n, n/2, n/2);
+    glVertex3f(-n, -n/2, n/2);
+    glVertex3f(-n, -n/2, -n/2);
+    glEnd();
+ 
+    glBegin(GL_QUADS);
+    glVertex3f(n, n/2, -n/2);
+    glVertex3f(n, n/2, n/2);
+    glVertex3f(n, -n/2, n/2);
+    glVertex3f(n, -n/2, -n/2);
+    glEnd();
+    
+    glBegin(GL_QUADS);
+    glVertex3f(-n, n/2, n/2);
+    glVertex3f(n, n/2, n/2);
+    glVertex3f(n, n/2, -n/2);
+    glVertex3f(-n, n/2, -n/2);
+    glEnd();
+    
+    glBegin(GL_QUADS);
+    glVertex3f(-n, -n/2, n/2);
+    glVertex3f(n, -n/2, n/2);
+    glVertex3f(n, -n/2, -n/2);
+    glVertex3f(-n, -n/2, -n/2);
+    glEnd();
+	
 }
 
 int kubus (float n) {
@@ -232,7 +388,8 @@ void layoutkursi()
     glVertex3f(60+2.5, -0.133 , -85-5);
      glEnd();
      
-     //belakang kiri kanan
+     
+     //belakang kiri 
     glBegin(GL_POLYGON);
     glColor3f(0.7, 0.7, 0.7);
     glVertex3f(-60, 20,-85-5-40);
@@ -240,6 +397,8 @@ void layoutkursi()
     glVertex3f(-60-2.5, -0.133 , -85-5);
      glEnd();
      
+
+
       //depan kanan
     glBegin(GL_POLYGON);
     glColor3f(0.7, 0.7, 0.7);
@@ -848,6 +1007,105 @@ p-=3;
 }
 }
 
+void pilar(){
+//belakang	
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(46,30,-110);
+glScalef(1.0,50.0,1.0);
+kubus(1);
+glPopMatrix();	
+
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(16,30,-110);
+glScalef(1.0,50.0,1.0);
+kubus(1);
+glPopMatrix();	
+
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(-14,30,-110);
+glScalef(1.0,50.0,1.0);
+kubus(1);
+glPopMatrix();	
+
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(-44,30,-110);
+glScalef(1.0,50.0,1.0);
+kubus(1);
+glPopMatrix();	
+
+//depan
+
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(46,30,35);
+glScalef(1.0,50.0,1.0);
+kubus(1);
+glPopMatrix();	
+
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(16,30,35);
+glScalef(1.0,50.0,1.0);
+kubus(1);
+glPopMatrix();	
+
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(-14,30,35);
+glScalef(1.0,50.0,1.0);
+kubus(1);
+glPopMatrix();	
+
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(-44,30,35);
+glScalef(1.0,50.0,1.0);
+kubus(1);
+glPopMatrix();	
+
+//kiri
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(-82,30,-16);
+glScalef(1.0,50.0,1.0);
+kubus(1);
+glPopMatrix();	
+
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(-82,30,-61);
+glScalef(1.0,50.0,1.0);
+kubus(1);
+glPopMatrix();	
+
+//kanan
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(82,30,-16);
+glScalef(1.0,50.0,1.0);
+kubus(1);
+glPopMatrix();	
+
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(82,30,-61);
+glScalef(1.0,50.0,1.0);
+kubus(1);
+glPopMatrix();	
+}
+
+void bola(){
+glPushMatrix();
+glColor3f(0.5, 0.0, 0.0);
+glTranslatef(0,1.5,-38);
+glutSolidSphere(1.5,50,10);
+glPopMatrix();	
+
+}
 
 void tingkatdepan(){
 int i;	
@@ -857,12 +1115,45 @@ float l=25.75+2.5;
 float c = 28.5;
 float b = 25.5+2.5;
 int a=58;
-glBegin(GL_QUADS);
+
+    glBegin(GL_QUADS);
 	glColor3f(0.7, 0.7, 0.7);
     glVertex3f(-60-2.5, 45-5 , 10.0+2.5+40+2.5);
     glVertex3f(60+2.5,45-5 ,10.0+2.5+40+2.5);
     glVertex3f(60+2.5, 20.133+4 , 10.0+2.5+10+2.5);
     glVertex3f(-60-2.5, 20.133+4, 10.0+2.5+10+2.5); 
+    glEnd();
+    
+     glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60-2.5, 20.133+4 , 10.0+2.5+10+2.5);
+    glVertex3f(60+2.5,20.133+4,10.0+2.5+10+2.5);
+    glVertex3f(60+2.5, 20.133, 10.0+2.5+10+2.5);
+    glVertex3f(-60-2.5, 20.133,10.0+2.5+10+2.5); 
+    glEnd();
+    
+     glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(60+2.5, 45-5 , 10.0+2.5+40+2.5);
+    glVertex3f(60+2.5, 24.133 ,10.0+2.5+10+2.5);
+    glVertex3f(60+2.5, 20.133, 10.0+2.5+10+2.5);
+    glVertex3f(60+2.5, 45-5-4, 10.0+2.5+40+2.5); 
+    glEnd();
+    
+     glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60-2.5, 45-5 , 10.0+2.5+40+2.5);
+    glVertex3f(-60-2.5, 24.133 ,10.0+2.5+10+2.5);
+    glVertex3f(-60-2.5, 20.133, 10.0+2.5+10+2.5);
+    glVertex3f(-60-2.5, 45-5-4, 10.0+2.5+40+2.5); 
+    glEnd();
+    
+    glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60-2.5, 45-5-4 , 10.0+2.5+40+2.5);
+    glVertex3f(60+2.5,45-5-4 ,10.0+2.5+40+2.5);
+    glVertex3f(60+2.5, 20.133 , 10.0+2.5+10+2.5);
+    glVertex3f(-60-2.5, 20.133,10.0+2.5+10+2.5); 
     glEnd();
     
 //depan
@@ -923,6 +1214,38 @@ glBegin(GL_QUADS);
     glVertex3f(-60-2.5-10, 22.133+2, -85-5); 
     glEnd();	
     
+glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60-2.5-40, 45-5-4 , -85-5);
+    glVertex3f(-60-2.5-40,45-5-4 ,10.0+5);
+    glVertex3f(-60-2.5-10, 22.133+2-4 , 10.0+5);
+    glVertex3f(-60-2.5-10, 22.133+2-4, -85-5); 
+    glEnd();    
+    
+ glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60-2.5-10, 22.133+2 , -85-5);
+    glVertex3f(-60-2.5-10,22.133+2 ,10.0+5);
+    glVertex3f(-60-2.5-10, 22.133+2-4 , 10.0+5);
+    glVertex3f(-60-2.5-10, 22.133+2-4, -85-5); 
+    glEnd();      
+	
+   glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60-2.5-10,22.133+2  , 10.0+5);
+    glVertex3f(-60-2.5-10,22.133+2-4 ,10.0+5);
+    glVertex3f(-60-2.5-40, 45-5-4 , 10.0+5);
+    glVertex3f(-60-2.5-40, 45-5, 10.0+5); 
+    glEnd();	 
+    
+     glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60-2.5-10,22.133+2  , -85-5);
+    glVertex3f(-60-2.5-10,22.133+2-4 ,-85-5);
+    glVertex3f(-60-2.5-40, 45-5-4 , -85-5);
+    glVertex3f(-60-2.5-40, 45-5, -85-5); 
+    glEnd();
+    
     //kiri
 for (i=1; i<=7; i++){
 
@@ -974,6 +1297,60 @@ e-=3;
 
 }
 }
+}
+
+void tingkatbelakangkiri(){
+	
+	glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60-2.5, 45-5 , -85-2.5-40-2.5);
+    glVertex3f(-60-2.5, 24.133,-85-2.5-10-2.5); 
+     glVertex3f(-60-2.5-10, 22.133+2, -85-5);
+   glVertex3f(-60-2.5-40, 45-5 , -85-5);
+    glEnd();
+    
+   	glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60-2.5, 45-5-4 , -85-2.5-40-2.5);
+    glVertex3f(-60-2.5, 23.133+2-4,-85-2.5-10-2.5); 
+    glVertex3f(-60-2.5-10, 22.133+2-4, -85-5);
+     glVertex3f(-60-2.5-40, 45-5-4 , -85-5);
+     glEnd();
+     
+    glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60-2.5, 24.133,-85-2.5-10-2.5);
+    glVertex3f(-60-2.5, 22.133+2-4,-85-2.5-10-2.5); 
+    glVertex3f(-60-2.5-10, 22.133+2-4, -85-5);
+    glVertex3f(-60-2.5-10, 22.133+2, -85-5);
+
+    glEnd();
+}
+
+tingkatdepankiri(){
+	glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60-2.5, 45-5 , 10.0+2.5+40+2.5);
+    glVertex3f(-60-2.5-40,45-5 ,10.0+5); 
+    glVertex3f(-60-2.5-10, 22.133+2 , 10.0+5);
+   glVertex3f(-60-2.5, 20.133+4, 10.0+2.5+10+2.5);
+    glEnd();
+    
+  glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60-2.5, 45-5-4 , 10.0+2.5+40+2.5);
+    glVertex3f(-60-2.5-40,45-5-4 ,10.0+5); 
+     glVertex3f(-60-2.5-10, 22.133+2-4 , 10.0+5);
+   glVertex3f(-60-2.5, 20.133+4-4, 10.0+2.5+10+2.5);
+    glEnd();
+     
+    glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60-2.5-10, 22.133+2 , 10.0+5);
+    glVertex3f(-60-2.5-10, 22.133+2-4 , 10.0+5); 
+    glVertex3f(-60-2.5, 20.133+4-4, 10.0+2.5+10+2.5);
+    glVertex3f(-60-2.5, 20.133+4, 10.0+2.5+10+2.5);
+     glEnd();
 }
 
 void pinggirlapangan()
@@ -1234,6 +1611,7 @@ float k = -52.5;
 int m = 12;
 int p= 12;
 int o = -46;
+	
 	//kiri
 glPushMatrix();
 glColor3f(1.0, 1.0, 1.0);
@@ -1455,6 +1833,51 @@ u+=1;
 
 }
 
+void papanscore()
+{
+glPushMatrix();
+glColor3f(0, 0, 0);
+glTranslatef(60.5,39.5,-37);
+glScalef(1.0,14.0,24.0);
+kubus(1);
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(0.4, 0.4, 0.4);
+glTranslatef(61.5,39.5,-37);
+glScalef(1.0,16.0,25.0);
+kubus(1);
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(0.4, 0.4, 0.4);
+glTranslatef(60.5,47,-37);
+glScalef(1.0,1.0,25.0);
+kubus(1);
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(0.4, 0.4, 0.4);
+glTranslatef(60.5,32,-37);
+glScalef(1.0,1.0,25.0);
+kubus(1);
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(0.4, 0.4, 0.4);
+glTranslatef(60.5,39.5,-24.5);
+glScalef(1.0,16.0,1.0);
+kubus(1);
+glPopMatrix();
+
+glPushMatrix();
+glColor3f(0.4, 0.4, 0.4);
+glTranslatef(60.5,39.5,-49.5);
+glScalef(1.0,16.0,1.0);
+kubus(1);
+glPopMatrix();
+}
+
 void bench(){
 	int i;
 int j;
@@ -1525,6 +1948,59 @@ else {
 }
 }
 }
+
+void broadcaster(){
+glPushMatrix();
+
+	glColor3f(1.0, 1.0, 1.0);
+glRotatef(220,0,1,0);
+glTranslatef(-9,41,130);
+
+balok(12);
+
+	glColor3f(0.15, 0.15, 0.15);
+glBegin(GL_QUADS);
+    glVertex3f(-12-0.01, 12/2, -12/2);
+    glVertex3f(-12-0.01, 12/2, 12/2);
+    glVertex3f(-12-0.01, -12/2, 12/2);
+    glVertex3f(-12-0.01, -12/2, -12/2);
+    glEnd();
+ 
+    glBegin(GL_QUADS);
+    glVertex3f(12+0.01, 12/2, -12/2);
+    glVertex3f(12+0.01, 12/2, 12/2);
+    glVertex3f(12+0.01, -12/2, 12/2);
+    glVertex3f(12+0.01, -12/2, -12/2);
+    glEnd();
+glPopMatrix(); 
+
+glPushMatrix();
+glRotatef(220,0,1,0);
+glTranslatef(-9,37,130);
+glColor3f(0.15, 0.15, 0.15);
+    glBegin(GL_QUADS);
+    glVertex3f(-12-0.01, 12/6, -12/2-0.01);
+    glVertex3f(12+0.01, 12/6, -12/2-0.01);
+    glVertex3f(12+0.01, -12/6, -12/2-0.01);
+    glVertex3f(-12-0.01, -12/6, -12/2-0.01);
+    glEnd();
+glPopMatrix();
+
+glPushMatrix();
+glRotatef(220,0,1,0);
+glTranslatef(-9,37,130);
+glColor3f(0.15, 0.15, 0.15);
+    glBegin(GL_QUADS);
+    glVertex3f(-12.012, 10.01, 12/2);
+    glVertex3f(12.012, 10.01, 12/2);
+    glVertex3f(12.012, 10.01, -12/2);
+    glVertex3f(-12.012, 10.01, -12/2);
+    glEnd();
+    
+glPopMatrix();
+
+}
+
 void tampil(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -1533,7 +2009,6 @@ void tampil(void)
 	glRotatef(xrot , 1.0f ,0.0f ,0.0f);
 	glRotatef(yrot , 0.0f , 1.0f , 0.0f);
 	glTranslatef(X,Y,Z);
-	glPushMatrix();
 	lapangan();
 	lingkaran();
 	gawang();
@@ -1544,9 +2019,14 @@ void tampil(void)
 	gawang();
 	kursi();
 	tingkatbelakang(); tingkatdepan(); tingkatkiri();
+	tingkatbelakangkiri(); tingkatdepankiri();
     tunnel();
     pemisah();
     bench();
+	papanscore();
+	pilar();
+	bola();
+	broadcaster();
 	
 	glutSwapBuffers();
 }
