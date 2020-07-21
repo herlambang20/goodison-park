@@ -20,7 +20,88 @@ int Y = 0;
 int Z = 0;
 
 
- 
+void DrawCircle(float cx, float cz, float cy ,  float r, int num_segments) 
+{ 
+	float theta = 2 * 3.1415926 / float(num_segments); 
+	float tangetial_factor = tanf(theta);//calculate the tangential factor 
+
+	float radial_factor = cosf(theta);//calculate the radial factor 
+	
+	float x = r;//we start at angle = 0 
+
+	float y = 0; 
+    
+	glBegin(GL_LINE_LOOP); 
+	for(int ii = 0; ii < num_segments; ii++) 
+	{ 
+		glVertex3f(x + cx, cz ,y + cy);//output vertex 
+        
+		//calculate the tangential vector 
+		//remember, the radial vector is (x, y) 
+		//to get the tangential vector we flip those coordinates and negate one of them 
+
+		float tx = -y; 
+		float ty = x; 
+        
+		//add the tangential vector 
+
+		x += tx * tangetial_factor; 
+		y += ty * tangetial_factor; 
+        
+		//correct using the radial factor 
+
+		x *= radial_factor; 
+		y *= radial_factor; 
+	} 
+	glEnd(); 
+}
+
+void seperempatCircle(float cx, float cz, float cy ,  float r, int num_segments) 
+{ 
+	float theta = 2 * 3.1415926 / float(num_segments); 
+	float tangetial_factor = tanf(theta);//calculate the tangential factor 
+
+	float radial_factor = cosf(theta);//calculate the radial factor 
+	
+	float x = r;//we start at angle = 0 
+
+	float y = 0; 
+    
+	glBegin(GL_LINE_LOOP); 
+	for(int ii = 0; ii < num_segments; ii++) 
+	{ 
+		glVertex3f(x + cx, cz ,y + cy);//output vertex 
+        
+		//calculate the tangential vector 
+		//remember, the radial vector is (x, y) 
+		//to get the tangential vector we flip those coordinates and negate one of them 
+
+		float tx = -y; 
+		float ty = x; 
+        
+		//add the tangential vector 
+
+		x += tx * -0.5*tangetial_factor; 
+		y += ty * -0.5*tangetial_factor; 
+        
+		//correct using the radial factor 
+
+		x *= radial_factor; 
+		y *= radial_factor; 
+	} 
+	glEnd(); 
+}
+
+void lingkaran()
+{
+	//garis tengah lapangan
+	glLineWidth(6.0);
+    DrawCircle(-0.5, 0.13, -37.5 , 10, 360);
+    
+    seperempatCircle(-40, 0.13, -2.5 , 5, 50);
+    //corner
+}
+
 
 int main (int argc , char **argv)
 {
@@ -128,10 +209,10 @@ void layoutkursi()
     //depan
     glBegin(GL_QUADS);
 	glColor3f(0.7, 0.7, 0.7);
-    glVertex3f(-60-2.5, 20 , 10.0+2.5+40);
-    glVertex3f(60+2.5,20 ,10.0+2.5+40);
-    glVertex3f(60+2.5, -0.133 , 10.0+2.5);
-    glVertex3f(-60-2.5, -0.133, 10.0+2.5); 
+    glVertex3f(-60-2.5, 20 , 10.0+2.5+40+5);
+    glVertex3f(60+2.5,20 ,10.0+2.5+40+5);
+    glVertex3f(60+2.5, -0.133 , 10.0+5);
+    glVertex3f(-60-2.5, -0.133, 10.0+5); 
     glEnd();
     
     //belakang
@@ -139,17 +220,49 @@ void layoutkursi()
 	glColor3f(0.7, 0.7, 0.7);
     glVertex3f(-60-2.5, 20 , -85-2.5-40);
     glVertex3f(60+2.5,20 ,-85-2.5-40);
-    glVertex3f(60+2.5, -0.133 , -85-2.5);
-    glVertex3f(-60-2.5, -0.133,-85-2.5); 
+    glVertex3f(60+2.5, -0.133 , -85-5);
+    glVertex3f(-60-2.5, -0.133,-85-5); 
     glEnd();
+    
+    //belakang kanan
+    glBegin(GL_POLYGON);
+    glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(60, 20,-85-5-40);
+    glVertex3f(60+40+2.5, 20 , -85-5);
+    glVertex3f(60+2.5, -0.133 , -85-5);
+     glEnd();
+     
+     //belakang kiri kanan
+    glBegin(GL_POLYGON);
+    glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60, 20,-85-5-40);
+    glVertex3f(-60-40-2.5, 20 , -85-5);
+    glVertex3f(-60-2.5, -0.133 , -85-5);
+     glEnd();
+     
+      //depan kanan
+    glBegin(GL_POLYGON);
+    glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(60, 20,10.0+2.5+40+5);
+    glVertex3f(60+40+2.5, 20 , 10.0+5);
+    glVertex3f(60+2.5, -0.133 , 10.0+5);
+     glEnd();
+     
+     //depan kiri
+    glBegin(GL_POLYGON);
+    glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-60, 20,10.0+2.5+40+5);
+    glVertex3f(-60-40-2.5, 20 , 10.0+5);
+    glVertex3f(-60-2.5, -0.133 , 10.0+5);
+     glEnd();
 }
 
 void tangga(){
 float n = 1.5;
-float k = -93;
+float k = -93-2;
 int i;
 float j=1.5;
-float l=17.75;
+float l=17.75+2.5;
 float b = 1.5;
 float a = 67.2;
 float c = 1.5;
@@ -217,11 +330,11 @@ void kursi()
 int i;
 int j;
 float n = 5;
-float k = -93.5;
+float k = -93.5-2.5;
 int p=58;
 
 float c = 5;
-float b = 17.5;
+float b = 17.5+2.5;
 int a=58;
 
 float x = 68;
@@ -366,51 +479,51 @@ e-=3;
 
 void tingkatbelakang(){
 float a = 26;
-float b = -100;
+float b = -100-2.5;
 int i,j;
 
 float n = 29.5;
-float k = -100.5;
+float k = -100.5-2.5;
 int p=58;
  //belakang
     glBegin(GL_QUADS);
 	glColor3f(0.7, 0.7, 0.7);
-    glVertex3f(-60-2.5, 45-5 , -85-2.5-40);
-    glVertex3f(60+2.5,45-5 ,-85-2.5-40);
-    glVertex3f(60+2.5, 25.133 , -85-2.5-10);
-    glVertex3f(-60-2.5, 25.133,-85-2.5-10); 
+    glVertex3f(-60-2.5, 45-5 , -85-2.5-40-2.5);
+    glVertex3f(60+2.5,45-5 ,-85-2.5-40-2.5);
+    glVertex3f(60+2.5, 25.133 , -85-2.5-10-2.5);
+    glVertex3f(-60-2.5, 25.133,-85-2.5-10-2.5); 
     glEnd();
     
     glBegin(GL_QUADS);
 	glColor3f(0.7, 0.7, 0.7);
-    glVertex3f(-60-2.5, 25.133 , -85-2.5-10);
-    glVertex3f(60+2.5,25.133 ,-85-2.5-10);
-    glVertex3f(60+2.5, 25.133-4, -85-2.5-10);
-    glVertex3f(-60-2.5, 25.133-4,-85-2.5-10); 
+    glVertex3f(-60-2.5, 25.133 , -85-2.5-10-2.5);
+    glVertex3f(60+2.5,25.133 ,-85-2.5-10-2.5);
+    glVertex3f(60+2.5, 25.133-4, -85-2.5-10-2.5);
+    glVertex3f(-60-2.5, 25.133-4,-85-2.5-10-2.5); 
     glEnd();
     
      glBegin(GL_QUADS);
 	glColor3f(0.7, 0.7, 0.7);
-    glVertex3f(60+2.5, 45-5 , -85-2.5-40);
-    glVertex3f(60+2.5, 25.133 ,-85-2.5-10);
-    glVertex3f(60+2.5, 25.133-4, -85-2.5-10);
-    glVertex3f(60+2.5, 45-5-4, -85-2.5-40); 
+    glVertex3f(60+2.5, 45-5 , -85-2.5-40-2.5);
+    glVertex3f(60+2.5, 25.133 ,-85-2.5-10-2.5);
+    glVertex3f(60+2.5, 25.133-4, -85-2.5-10-2.5);
+    glVertex3f(60+2.5, 45-5-4, -85-2.5-40-2.5); 
     glEnd();
     
      glBegin(GL_QUADS);
 	glColor3f(0.7, 0.7, 0.7);
-    glVertex3f(-60-2.5, 45-5 , -85-2.5-40);
-    glVertex3f(-60-2.5, 25.133 ,-85-2.5-10);
-    glVertex3f(-60-2.5, 25.133-4, -85-2.5-10);
-    glVertex3f(-60-2.5, 45-5-4, -85-2.5-40); 
+    glVertex3f(-60-2.5, 45-5 , -85-2.5-40-2.5);
+    glVertex3f(-60-2.5, 25.133 ,-85-2.5-10-2.5);
+    glVertex3f(-60-2.5, 25.133-4, -85-2.5-10-2.5);
+    glVertex3f(-60-2.5, 45-5-4, -85-2.5-40-2.5); 
     glEnd();
     
     glBegin(GL_QUADS);
 	glColor3f(0.7, 0.7, 0.7);
-    glVertex3f(-60-2.5, 45-5-4 , -85-2.5-40);
-    glVertex3f(60+2.5,45-5-4 ,-85-2.5-40);
-    glVertex3f(60+2.5, 25.133-4 , -85-2.5-10);
-    glVertex3f(-60-2.5, 25.133-4,-85-2.5-10); 
+    glVertex3f(-60-2.5, 45-5-4 , -85-2.5-40-2.5);
+    glVertex3f(60+2.5,45-5-4 ,-85-2.5-40-2.5);
+    glVertex3f(60+2.5, 25.133-4 , -85-2.5-10-2.5);
+    glVertex3f(-60-2.5, 25.133-4,-85-2.5-10-2.5); 
     glEnd();
    
 //tangga
@@ -464,25 +577,17 @@ void tingkatdepan(){
 int i;	
 int k;
 float j=25;
-float l=25.75;	
+float l=25.75+2.5;	
 float c = 28.5;
-float b = 25.5;
+float b = 25.5+2.5;
 int a=58;
 glBegin(GL_QUADS);
 	glColor3f(0.7, 0.7, 0.7);
-    glVertex3f(-60-2.5, 45-5 , 10.0+2.5+40);
-    glVertex3f(60+2.5,45-5 ,10.0+2.5+40);
-    glVertex3f(60+2.5, 20.133+4 , 10.0+2.5+10);
-    glVertex3f(-60-2.5, 20.133+4, 10.0+2.5+10); 
+    glVertex3f(-60-2.5, 45-5 , 10.0+2.5+40+2.5);
+    glVertex3f(60+2.5,45-5 ,10.0+2.5+40+2.5);
+    glVertex3f(60+2.5, 20.133+4 , 10.0+2.5+10+2.5);
+    glVertex3f(-60-2.5, 20.133+4, 10.0+2.5+10+2.5); 
     glEnd();
-	
-glBegin(GL_QUADS);
-	glColor3f(0.7, 0.7, 0.7);
-    glVertex3f(-60-2.5, 45-5 , 10.0+2.5+40);
-    glVertex3f(60+2.5,45-5 ,10.0+2.5+40);
-    glVertex3f(60+2.5, 20.133+4 , 10.0+2.5+10);
-    glVertex3f(-60-2.5, 20.133+4, 10.0+2.5+10); 
-    glEnd();		
     
 //depan
 for (i=1; i<=7; i++){
@@ -1085,6 +1190,7 @@ void tampil(void)
 	glTranslatef(X,Y,Z);
 	glPushMatrix();
 	lapangan();
+	lingkaran();
 	gawang();
 	pinggirlapangan();
 	layoutkursi();
@@ -1093,8 +1199,6 @@ void tampil(void)
 	gawang();
 	kursi();
 	tingkatbelakang(); tingkatdepan(); tingkatkiri();
-    
- 
 
 	
 	glutSwapBuffers();
