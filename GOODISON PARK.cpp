@@ -127,7 +127,7 @@ int main (int argc , char **argv)
 void init (void)
 {
 	
-	glClearColor (0.0 , 0.0 , 0.0 ,1.0);
+	glClearColor (1.0 , 1.0 , 1.0 ,1.0);
 	glMatrixMode(GL_PROJECTION);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_COLOR_MATERIAL);
@@ -136,7 +136,7 @@ void init (void)
 	is_depth = 1;
 	glMatrixMode(GL_MODELVIEW);
 	glPointSize(9.0);
-	glLineWidth(1.0f);
+
 }
 
 int kubus (float n) {
@@ -341,11 +341,68 @@ float x = 68;
 float y = 5;
 int z=11;
 //belakang
+
 for(j=1; j<=40; j++){	
 
 if(j%5==0){
 p-=3;	
 }
+
+else if (j<=26 && j>=20) 
+{
+	for (i=7; i>=1; i--){
+
+	glPushMatrix();
+	glColor3f(0.0, 0.0, 0.7);
+	glTranslatef(p,n+4,k-7.4);
+	glScalef(2,3,0.5);
+	kubus(1);
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0.0, 0.0, 0.7);
+	glTranslatef(p,n-1+4,k+1-7.4);
+	glScalef(2,0.5,1.5);
+	kubus(1);
+	glPopMatrix();
+	n+=2;
+	k-=3.7;
+			if(i==1){
+			n-=14;
+			k+=25.9;
+				}
+					}
+	p-=3;
+}
+
+else if (j<=19 && j>=14) 
+{
+	for (i=7; i>=1; i--){
+
+	glPushMatrix();
+	glColor3f(0.0, 0.0, 0.7);
+	glTranslatef(p,n+4,k-7.4);
+	glScalef(2,3,0.5);
+	kubus(1);
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0.0, 0.0, 0.7);
+	glTranslatef(p,n-1+4,k+1-7.4);
+	glScalef(2,0.5,1.5);
+	kubus(1);
+	glPopMatrix();
+	n+=2;
+	k-=3.7;
+			if(i==1){
+			n-=14;
+			k+=25.9;
+				}
+					}
+	p-=3;
+}
+
+
 else{
 
 	for (i=1; i<=9; i++){
@@ -379,6 +436,8 @@ for(j=1; j<=40; j++){
 	if(j%5==0){
 a-=3;	
 }
+
+
 else{
 	for (i=1; i<=9; i++){
 
@@ -475,7 +534,224 @@ e-=3;
 }
 }
 
+void tunnel ()
+{
+//tunnel	
+glPushMatrix();
+glColor3f(0.0, 0.0, 0.0);
+glTranslatef(1,4,-93);
+glScalef(8,9.9,1.0);
+kubus(1);
+glPopMatrix();
 
+//dinding
+glPushMatrix();
+glColor3f(0.0, 0.0, 0.2);
+glTranslatef(-2.75,4,-90);
+glScalef(0.5,9.9,0.5);
+kubus(1);
+glPopMatrix();
+
+//dinding
+glPushMatrix();
+glColor3f(0.0, 0.0, 0.2);
+glTranslatef(4.75,4,-90);
+glScalef(0.5,9.9,0.5);
+kubus(1);
+glPopMatrix();
+
+glBegin(GL_QUADS);
+glColor3f(0.0, 0.0, 0.3);
+glVertex3f(-3.01,9,-90);
+glVertex3f(-3.01,0,-90);
+glVertex3f(-3.01,0,-98);
+glVertex3f(-3.01,9,-94);
+glEnd();
+
+glBegin(GL_QUADS);
+glColor3f(0.0, 0.0, 0.3);
+glVertex3f(5.01,9,-90);
+glVertex3f(5.01,0,-90);
+glVertex3f(5.01,0,-98);
+glVertex3f(5.01,9,-94);
+glEnd();
+
+glBegin(GL_QUADS);
+glColor3f(0.0, 0.0, 0.3);
+glVertex3f(-3.01,9,-90);
+glVertex3f(-3.01,9,-94);
+glVertex3f(5.01,9,-94);
+glVertex3f(5.01,9,-90);
+glEnd();
+
+glBegin(GL_QUADS);
+glColor3f(0.0, 0.0, 0.3);
+glVertex3f(-3.01,9,-94);
+glVertex3f(-3.01,0,-98);
+glVertex3f(5.01,0,-98);
+glVertex3f(5.01,9,-94);
+glEnd();
+
+
+
+}
+
+void pemisah()
+{
+//pagar
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(-3.75,2,-90-0.5);
+glScalef(0.5,7,0.5);
+kubus(1);
+glPopMatrix();
+
+//pagar
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(-3.75,2+2,-90-3.7-0.5);
+glScalef(0.5,7,0.5);
+kubus(1);
+glPopMatrix();
+
+//pagar
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(-3.75,2+2+2,-90-3.7-3.7-0.5);
+glScalef(0.5,7,0.5);
+kubus(1);
+glPopMatrix();
+
+//pagar
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(-9.75,2+2+2,-90-3.7-3.7-0.5);
+glScalef(0.5,7,0.5);
+kubus(1);
+glPopMatrix();
+
+//pagar
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(-16.75,2+2+2,-90-3.7-3.7-0.5);
+glScalef(0.5,7,0.5);
+kubus(1);
+glPopMatrix();
+
+//pagar
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(-16.75,2+2,-90-3.7-0.5);
+glScalef(0.5,7,0.5);
+kubus(1);
+glPopMatrix();
+
+
+glPushMatrix();
+glLineWidth(2.0);
+glBegin(GL_LINES);
+glColor3f(0.2, 0.2, 0.2);
+glVertex3f(-3.75,9,-90-3.7-0.5-3.7);
+glVertex3f(-3.75,5,-90-0.5);
+glEnd();
+glPopMatrix();
+
+glPushMatrix();
+glLineWidth(2.0);
+glBegin(GL_LINES);
+glColor3f(0.2, 0.2, 0.2);
+glVertex3f(-3.75,9,-90-3.7-0.5-3.7);
+glVertex3f(-16.75,9,-90-3.7-0.5-3.7);
+glEnd();
+glPopMatrix();
+
+glPushMatrix();
+glLineWidth(2.0);
+glBegin(GL_LINES);
+glColor3f(0.2, 0.2, 0.2);
+glVertex3f(-16.75,9,-90-3.7-0.5-3.7);
+glVertex3f(-16.75,7,-90-3.7-0.5);
+glEnd();
+glPopMatrix();
+
+//pagar2
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(5.75,2,-90-0.5);
+glScalef(0.5,7,0.5);
+kubus(1);
+glPopMatrix();
+
+//pagar2
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(5.75,2+2,-90-3.7-0.5);
+glScalef(0.5,7,0.5);
+kubus(1);
+glPopMatrix();
+
+//pagar2
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(5.75,2+2+2,-90-3.7-0.5-3.7);
+glScalef(0.5,7,0.5);
+kubus(1);
+glPopMatrix();
+
+//pagar 2
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(12.75,2+2+2,-90-3.7-3.7-0.5);
+glScalef(0.5,7,0.5);
+kubus(1);
+glPopMatrix();
+
+//pagar
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(18.75,2+2+2,-90-3.7-3.7-0.5);
+glScalef(0.5,7,0.5);
+kubus(1);
+glPopMatrix();
+
+//pagar2
+glPushMatrix();
+glColor3f(0.1, 0.1, 0.1);
+glTranslatef(18.75,2+2,-90-3.7-0.5);
+glScalef(0.5,7,0.5);
+kubus(1);
+glPopMatrix();
+
+glPushMatrix();
+glLineWidth(2.0);
+glBegin(GL_LINES);
+glColor3f(0.2, 0.2, 0.2);
+glVertex3f(5.75,9,-90-3.7-0.5-3.7);
+glVertex3f(5.75,5,-90-0.5);
+glEnd();
+glPopMatrix();
+
+glPushMatrix();
+glLineWidth(2.0);
+glBegin(GL_LINES);
+glColor3f(0.2, 0.2, 0.2);
+glVertex3f(5.75,9,-90-3.7-0.5-3.7);
+glVertex3f(18.75,9,-90-3.7-0.5-3.7);
+glEnd();
+glPopMatrix();
+
+glPushMatrix();
+glLineWidth(2.0);
+glBegin(GL_LINES);
+glColor3f(0.2, 0.2, 0.2);
+glVertex3f(18.75,9,-90-3.7-0.5-3.7);
+glVertex3f(18.75,7,-90-3.7-0.5);
+glEnd();
+glPopMatrix();
+
+
+	
+}
 
 void tingkatbelakang(){
 float a = 26;
@@ -1009,6 +1285,7 @@ glPopMatrix();
 for (i=1; i<=32; i++){
 
 glPushMatrix();
+glLineWidth(1.0);
 glBegin(GL_LINES);
 glColor3f(1.0, 1.0, 1.0);
 glVertex3f(-40,12,n);
@@ -1178,8 +1455,76 @@ u+=1;
 
 }
 
+void bench(){
+	int i;
+int j;
+float n = 5-2;
+float k = -93.5+2;
+int p=58-3.5;
+for(j=1; j<=40; j++){	
 
+if(j%5==0){
+p-=3;	
+}
 
+else if (j<=25 && j>=20) 
+{
+	for (i=2; i>=1; i--){
+
+	glPushMatrix();
+	glColor3f(0.0, 0.0, 0.0);
+	glTranslatef(p,n-0.5,k);
+	glScalef(2,3+0.5,0.5);
+	kubus(1);
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0.0, 0.0, 0.7);
+	glTranslatef(p,n-1,k+1);
+	glScalef(2,0.5,1.5);
+	kubus(1);
+	glPopMatrix();
+	n+=2;
+	k-=3.7;
+			if(i==1){
+			n-=4;
+			k+=7.4;
+				}
+					}
+	p-=3;
+}
+
+else if (j<=19 && j>=15) 
+{
+	for (i=2; i>=1; i--){
+
+	glPushMatrix();
+	glColor3f(0.0, 0.0, 0.0);
+	glTranslatef(p+8,n-0.5,k);
+	glScalef(2,3.5,0.5);
+	kubus(1);
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0.0, 0.0, 0.7);
+	glTranslatef(p+8,n-1,k+1);
+	glScalef(2,0.5,1.5);
+	kubus(1);
+	glPopMatrix();
+	n+=2;
+	k-=3.7;
+			if(i==1){
+			n-=4;
+			k+=7.4;
+				}
+					}
+	p-=3;
+}	
+else {
+	p-=3;
+}
+}
+}
 void tampil(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -1199,7 +1544,9 @@ void tampil(void)
 	gawang();
 	kursi();
 	tingkatbelakang(); tingkatdepan(); tingkatkiri();
-
+    tunnel();
+    pemisah();
+    bench();
 	
 	glutSwapBuffers();
 }
@@ -1305,4 +1652,3 @@ void ukuran (int lebar , int tinggi)
 	glTranslatef(0.0 , -5.0 , -150.0);
 	glMatrixMode(GL_MODELVIEW);
 }
-
