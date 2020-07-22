@@ -362,6 +362,22 @@ void dinding()
     glVertex3f(-62.5, -4.75 ,-134);
      glEnd();
      
+       //tutupkiriatas
+     glBegin(GL_POLYGON);
+    glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-105.5, 61, 15 );
+    glVertex3f(-62.5 , 61, 15);
+    glVertex3f(-62.5, 61,62);
+     glEnd();
+     
+       //tutupkiribawah
+     glBegin(GL_POLYGON);
+    glColor3f(0.7, 0.7, 0.7);
+    glVertex3f(-105.5, 61, -90 );
+    glVertex3f(-62.5 , 61 , -90);
+    glVertex3f(-62.5, 61,-134);
+     glEnd();
+     
 	//bawah 2
 	glPushMatrix();
 	glColor3f(1,1,1);
@@ -1282,28 +1298,28 @@ void pilar(){
 	glPushMatrix();
 	glColor3f(0.1, 0.1, 0.1);
 	glTranslatef(46,30,-110);
-	glScalef(1.0,50.0,1.0);
+	glScalef(1.0,62.0,1.0);
 	kubus(1);
 	glPopMatrix();	
 	
 	glPushMatrix();
 	glColor3f(0.1, 0.1, 0.1);
 	glTranslatef(16,30,-110);
-	glScalef(1.0,50.0,1.0);
+	glScalef(1.0,62.0,1.0);
 	kubus(1);
 	glPopMatrix();	
 	
 	glPushMatrix();
 	glColor3f(0.1, 0.1, 0.1);
 	glTranslatef(-14,30,-110);
-	glScalef(1.0,50.0,1.0);
+	glScalef(1.0,62.0,1.0);
 	kubus(1);
 	glPopMatrix();	
 	
 	glPushMatrix();
 	glColor3f(0.1, 0.1, 0.1);
 	glTranslatef(-44,30,-110);
-	glScalef(1.0,50.0,1.0);
+	glScalef(1.0,62.0,1.0);
 	kubus(1);
 	glPopMatrix();	
 	
@@ -1312,28 +1328,28 @@ void pilar(){
 	glPushMatrix();
 	glColor3f(0.1, 0.1, 0.1);
 	glTranslatef(46,30,35);
-	glScalef(1.0,50.0,1.0);
+	glScalef(1.0,62.0,1.0);
 	kubus(1);
 	glPopMatrix();	
 	
 	glPushMatrix();
 	glColor3f(0.1, 0.1, 0.1);
 	glTranslatef(16,30,35);
-	glScalef(1.0,50.0,1.0);
+	glScalef(1.0,62.0,1.0);
 	kubus(1);
 	glPopMatrix();	
 	
 	glPushMatrix();
 	glColor3f(0.1, 0.1, 0.1);
 	glTranslatef(-14,30,35);
-	glScalef(1.0,50.0,1.0);
+	glScalef(1.0,62.0,1.0);
 	kubus(1);
 	glPopMatrix();	
 	
 	glPushMatrix();
 	glColor3f(0.1, 0.1, 0.1);
 	glTranslatef(-44,30,35);
-	glScalef(1.0,50.0,1.0);
+	glScalef(1.0,62.0,1.0);
 	kubus(1);
 	glPopMatrix();	
 	
@@ -1341,29 +1357,29 @@ void pilar(){
 	glPushMatrix();
 	glColor3f(0.1, 0.1, 0.1);
 	glTranslatef(-82,30,-16);
-	glScalef(1.0,50.0,1.0);
+	glScalef(1.0,62.0,1.0);
 	kubus(1);
 	glPopMatrix();	
 	
 	glPushMatrix();
 	glColor3f(0.1, 0.1, 0.1);
 	glTranslatef(-82,30,-61);
-	glScalef(1.0,50.0,1.0);
+	glScalef(1.0,62.0,1.0);
 	kubus(1);
 	glPopMatrix();	
 	
 	//kanan
 	glPushMatrix();
 	glColor3f(0.1, 0.1, 0.1);
-	glTranslatef(82,23.75,-16);
-	glScalef(1.0,47.5,1.0);
+	glTranslatef(82,30,-16);
+	glScalef(1.0,62.0,1.0);
 	kubus(1);
 	glPopMatrix();	
 	
 	glPushMatrix();
 	glColor3f(0.1, 0.1, 0.1);
-	glTranslatef(82,23.75,-61);
-	glScalef(1.0,47.5,1.0);
+	glTranslatef(82,30,-61);
+	glScalef(1.0,62.0,1.0);
 	kubus(1);
 	glPopMatrix();	
 }
