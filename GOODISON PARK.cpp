@@ -302,6 +302,14 @@ void dinding()
 	kubus(1);
 	glPopMatrix();
 	
+	//atapbelakang
+	glPushMatrix();
+	glColor3f(0.3,0.3,0.3);
+	glTranslatef(0,63,-114);
+	glScalef(127,3,40);
+	kubus(1);
+	glPopMatrix();
+	
 	//belakang 1 kiri
 	glBegin(GL_TRIANGLES);
 	glVertex3f(-62.5,21,-134);
@@ -365,8 +373,15 @@ void dinding()
 	//kanan
 	glPushMatrix();
 	glColor3f(1,1,1);
-	glTranslatef(104,26.5,-37.5);
-	glScalef(3,55,105);
+	glTranslatef(104,30,-37.5);
+	glScalef(3,62,105);
+	kubus(1);
+	glPopMatrix();
+	//atapkanan
+	glPushMatrix();
+	glColor3f(0.3,0.3,0.3);
+	glTranslatef(85.5,63,-37.5);
+	glScalef(40,3,105);
 	kubus(1);
 	glPopMatrix();
 	
@@ -422,6 +437,14 @@ void dinding()
 	kubus(1);
 	glPopMatrix();
 	
+	//atapkiri
+	glPushMatrix();
+	glColor3f(0.3,0.3,0.3);
+	glTranslatef(-85.5,63,-37.5);
+	glScalef(-40,3,105);
+	kubus(1);
+	glPopMatrix();
+	
 	//depan kiri
 	glBegin(GL_TRIANGLES);
 	glVertex3f(105,21,15);
@@ -441,6 +464,14 @@ void dinding()
 	glColor3f(1,1,1);
 	glTranslatef(0,30,60.5);
 	glScalef(125,62.0,3);
+	kubus(1);
+	glPopMatrix();
+	
+	//atapdepan
+	glPushMatrix();
+	glColor3f(0.3,0.3,0.3);
+	glTranslatef(0,63,38.5);
+	glScalef(127,3,47);
 	kubus(1);
 	glPopMatrix();
 	
